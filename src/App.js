@@ -1,25 +1,35 @@
-import logo from './logo.svg';
+import { Routes, Route } from 'react-router-dom';
+import { Home } from './pages/home';
+import { Favorites } from './pages/favorites';
+import { AppShell, Header, MantineProvider } from '@mantine/core';
 import './App.css';
+import { HeaderContent } from './components/header';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MantineProvider
+      theme={{
+        fontFamily: 'Inter, sans-serif',
+      }}>
+      <AppShell
+        padding="md"
+        header={
+          <Header height={84} pl={162} pr={162}>
+            <HeaderContent />
+          </Header>
+        }
+        styles={() => ({
+          main: {
+            backgroundColor: '#f7f7f8',
+          },
+        })}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/favorites" element={<Favorites />} />
+        </Routes>
+      </AppShell>
+    </MantineProvider>
   );
-}
+};
 
 export default App;
