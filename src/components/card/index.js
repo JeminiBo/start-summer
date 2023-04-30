@@ -1,20 +1,13 @@
 import { useMemo } from 'react';
 import { Flex } from '@mantine/core';
-import { ReactComponent as LocationIcon } from '../../assets/location.svg';
-import { ReactComponent as StarIcon } from '../../assets/star.svg';
+import { ReactComponent as LocationIcon } from './assets/location.svg';
+import { ReactComponent as StarIcon } from './assets/star.svg';
 import './styles.css';
 
 const Card = (props) => {
-  const {
-    vacancy: {
-      profession,
-      town,
-      type_of_work,
-      payment_to,
-      payment_from,
-      currency,
-    },
-  } = props;
+  const { vacancy, setFavorite, isFavorite } = props;
+  const { profession, town, type_of_work, payment_to, payment_from, currency } =
+    vacancy;
 
   const salary = useMemo(() => {
     if (payment_to > 0 && payment_from > 0) {
@@ -46,7 +39,12 @@ const Card = (props) => {
           <p className="card-location">{town.title}</p>
         </Flex>
       </Flex>
-      <StarIcon />
+      <StarIcon
+        className="card-star"
+        onClick={setFavorite}
+        fill={isFavorite ? '#5E96FC' : '#fff'}
+        stroke={isFavorite ? '#5E96FC' : '#ACADB9'}
+      />
     </Flex>
   );
 };
