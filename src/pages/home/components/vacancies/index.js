@@ -1,18 +1,18 @@
-import { useReducer } from 'react';
+import { useState } from 'react';
 import { Button, Flex, Input, LoadingOverlay } from '@mantine/core';
 import { IconSearch } from '@tabler/icons-react';
-import './styles.css';
-import { Card } from '../../../../components/card';
 import { useVacancies } from '../../../../core/vacancies/useVacancies';
-import { favoritesReducer } from '../../../../store/favoritesVacancies';
-import { getFavoritesVacancies } from '../../../../helpers/favoritesVacanciesHelper';
+import './styles.css';
+import { CardsWithPagination } from '../../../../components/cardsWithPagination';
 
 const Vacancies = (props) => {
   const { isLoading } = props;
-  const { data: vacancies, isLoading: isVacanciesLoading } = useVacancies();
-  const [state, dispatch] = useReducer(favoritesReducer, {
-    favoritesVacancies: getFavoritesVacancies(),
-  });
+  const [activePage, setPage] = useState(1);
+  const { data: vacancies, isFetching: isVacanciesLoading } = useVacancies(
+    activePage,
+    4
+  );
+  const totalPages = vacancies ? Math.floor(vacancies.total / 4) : 100;
 
   return (
     <Flex direction="column" gap={16} miw={773} className="vacancies">
@@ -33,23 +33,14 @@ const Vacancies = (props) => {
           input: { height: 48, borderRadius: 8, borderColor: '#EAEBED' },
         }}
       />
-      {vacancies
-        ? vacancies.objects.map((item) => (
-            <Card
-              key={item.id}
-              vacancy={item}
-              favoritesVacancies={state.favoritesVacancies}
-              setFavorite={() =>
-                dispatch({ type: 'updateFavorites', payload: item })
-              }
-              isFavorite={
-                !!state.favoritesVacancies.find(
-                  (vacancy) => vacancy.id === item.id
-                )
-              }
-            />
-          ))
-        : null}
+      {vacancies ? (
+        <CardsWithPagination
+          vacancies={vacancies.objects}
+          activePage={activePage}
+          setPage={setPage}
+          totalPages={totalPages > 100 ? 100 : totalPages}
+        />
+      ) : null}
     </Flex>
   );
 };

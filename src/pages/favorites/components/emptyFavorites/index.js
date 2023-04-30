@@ -4,7 +4,7 @@ import './styles.css';
 
 const EmptyFavorites = () => {
   return (
-    <Flex direction="column" gap={32} align="center" mt={104}>
+    <Flex direction="column" gap={32} align="center" mt={80}>
       <img
         src={NoFavoritesImage}
         alt="no-favorites"
