@@ -10,6 +10,7 @@ const App = () => {
     <MantineProvider
       theme={{
         fontFamily: 'Inter, sans-serif',
+        lineHeight: '1rem',
       }}>
       <AppShell
         padding="md"
