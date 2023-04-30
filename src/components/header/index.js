@@ -6,7 +6,6 @@ import classNames from 'classnames';
 
 const HeaderContent = () => {
   const { pathname } = useLocation();
-  console.log('Loc', pathname);
   return (
     <Flex align="center" mih={84} gap={280}>
       <Flex align="center" gap={12}>

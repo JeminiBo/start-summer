@@ -3,6 +3,7 @@ import ResetIcon from './assets/reset.png';
 import { Select, Button } from '@mantine/core';
 import { IconChevronDown } from '@tabler/icons-react';
 import './styles.css';
+import { useCatalogues } from '../../../../core/catalogues/useCatalogues';
 
 const selectStyles = {
   rightSection: { pointerEvents: 'none' },
@@ -10,6 +11,7 @@ const selectStyles = {
 };
 
 const Filters = () => {
+  const { data: catalogues } = useCatalogues();
   return (
     <div className="filter-wrapper">
       <Flex justify="space-between" align="center" mb={32}>
@@ -25,7 +27,7 @@ const Filters = () => {
           placeholder={'Выберете отрасль'}
           rightSection={<IconChevronDown size="1rem" />}
           rightSectionWidth={30}
-          data={['React', 'Angular', 'Svelte', 'Vue']}
+          data={catalogues ? catalogues.map((item) => item.title_rus) : []}
           styles={selectStyles}
         />
         <Flex direction="column" gap={8}>

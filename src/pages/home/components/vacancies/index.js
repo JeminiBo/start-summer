@@ -1,11 +1,19 @@
-import { Button, Flex, Input } from '@mantine/core';
+import { Button, Flex, Input, LoadingOverlay } from '@mantine/core';
 import { IconSearch } from '@tabler/icons-react';
 import './styles.css';
-import { Card } from './components/card/card';
+import { Card } from './components/card';
+import { useVacancies } from '../../../../core/vacancies/useVacancies';
 
-const Vacancies = () => {
+const Vacancies = (props) => {
+  const { isLoading } = props;
+  const { data: vacancies, isLoading: isVacanciesLoading } = useVacancies();
+
   return (
-    <Flex direction="column" gap={16} miw={773}>
+    <Flex direction="column" gap={16} miw={773} className="vacancies">
+      <LoadingOverlay
+        visible={isLoading || isVacanciesLoading}
+        overlayBlur={2}
+      />
       <Input
         icon={<IconSearch size="1rem" />}
         placeholder="Введите название вакансии"
@@ -19,7 +27,9 @@ const Vacancies = () => {
           input: { height: 48, borderRadius: 8, borderColor: '#EAEBED' },
         }}
       />
-      <Card />
+      {vacancies
+        ? vacancies.objects.map((item) => <Card key={item.id} vacancy={item} />)
+        : null}
     </Flex>
   );
 };
