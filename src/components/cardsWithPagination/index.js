@@ -16,7 +16,15 @@ const CardsWithPagination = (props) => {
   const [state, dispatch] = useReducer(favoritesReducer, {
     favoritesVacancies: getFavoritesVacancies(),
   });
-  const currentVacancies = isFavorites ? state.favoritesVacancies : vacancies;
+  const currentVacancies = isFavorites
+    ? state.favoritesVacancies.slice(
+        (activePage - 1) * 4,
+        (activePage - 1) * 4 + 4
+      )
+    : vacancies;
+  const currentTotalPages = isFavorites
+    ? Math.ceil((state.favoritesVacancies.length - 1) / 4)
+    : totalPages;
 
   return currentVacancies.length ? (
     <Flex direction="column" gap={16}>
@@ -34,7 +42,7 @@ const CardsWithPagination = (props) => {
         />
       ))}
       <Pagination
-        total={totalPages}
+        total={currentTotalPages}
         position="center"
         value={activePage}
         onChange={setPage}
