@@ -4,6 +4,7 @@ import { IconSearch } from '@tabler/icons-react';
 import { useVacancies } from '../../../../core/vacancies/useVacancies';
 import './styles.css';
 import { CardsWithPagination } from '../../../../components/cardsWithPagination';
+import { useNavigate } from 'react-router-dom';
 
 const Vacancies = (props) => {
   const { isLoading, vacanciesSettings, setSearch } = props;
@@ -15,6 +16,7 @@ const Vacancies = (props) => {
     4
   );
   const totalPages = vacancies ? Math.floor(vacancies.total / 4) : 100;
+  const navigate = useNavigate();
 
   return (
     <Flex direction="column" gap={16} miw={773} className="vacancies">
@@ -46,6 +48,7 @@ const Vacancies = (props) => {
           activePage={activePage}
           setPage={setPage}
           totalPages={totalPages > 100 ? 100 : totalPages}
+          onCardClick={(id) => navigate(`vacancy/${id}`)}
         />
       ) : null}
     </Flex>

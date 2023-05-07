@@ -12,6 +12,7 @@ const CardsWithPagination = (props) => {
     activePage,
     setPage,
     totalPages,
+    onCardClick,
   } = props;
   const [state, dispatch] = useReducer(favoritesReducer, {
     favoritesVacancies: getFavoritesVacancies(),
@@ -32,13 +33,13 @@ const CardsWithPagination = (props) => {
         <Card
           key={item.id}
           vacancy={item}
-          favoritesVacancies={state.favoritesVacancies}
           setFavorite={() =>
             dispatch({ type: 'updateFavorites', payload: item })
           }
           isFavorite={
             !!state.favoritesVacancies.find((vacancy) => vacancy.id === item.id)
           }
+          onClick={() => onCardClick(item.id)}
         />
       ))}
       <Pagination

@@ -12,3 +12,9 @@ export const getVacancies = async (vacanciesSettings, page, count) => {
 
   return response;
 };
+
+export const getVacancy = async (id) => {
+  const response = await getHelper(`vacancies/${id}`);
+
+  return response;
+};

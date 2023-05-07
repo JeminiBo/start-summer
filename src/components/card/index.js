@@ -5,7 +5,7 @@ import { ReactComponent as StarIcon } from './assets/star.svg';
 import './styles.css';
 
 const Card = (props) => {
-  const { vacancy, setFavorite, isFavorite } = props;
+  const { vacancy, setFavorite, isFavorite, onClick } = props;
   const { profession, town, type_of_work, payment_to, payment_from, currency } =
     vacancy;
 
@@ -26,7 +26,8 @@ const Card = (props) => {
       p={24}
       justify="space-between"
       bg="#fff"
-      className="card">
+      className="card"
+      onClick={onClick}>
       <Flex direction="column" gap={12}>
         <p className="card-title">{profession}</p>
         <Flex gap={12}>

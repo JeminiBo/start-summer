@@ -1,9 +1,10 @@
 import { Routes, Route } from 'react-router-dom';
+import { HeaderContent } from './components/header';
 import { Home } from './pages/home';
 import { Favorites } from './pages/favorites';
+import { Vacancy } from './pages/vacancy';
 import { AppShell, Header, MantineProvider } from '@mantine/core';
 import './App.css';
-import { HeaderContent } from './components/header';
 
 const App = () => {
   return (
@@ -27,6 +28,9 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/favorites" element={<Favorites />} />
+          <Route path="/vacancy">
+            <Route path=":id"  element={<Vacancy />} />
+          </Route>
         </Routes>
       </AppShell>
     </MantineProvider>

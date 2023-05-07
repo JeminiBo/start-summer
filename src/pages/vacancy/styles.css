@@ -1,0 +1,29 @@
+.vacancy-desc-title {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 20px;
+  color: #232134;
+  margin-bottom: 16px;
+}
+
+.vacancy-desc {
+  border: 1px solid #eaebed;
+  border-radius: 12px;
+}
+
+.vacancy-desc-text {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+  color: #232134;
+}
+
+.vacancy-desc-list {
+  margin-bottom: 20px;
+  padding-left: 24px;
+  margin-top: 0;
+}
+
+.vacancy-desc-list:last-child {
+  margin-bottom: 0;
+}
