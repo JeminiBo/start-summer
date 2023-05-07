@@ -6,9 +6,11 @@ import './styles.css';
 import { CardsWithPagination } from '../../../../components/cardsWithPagination';
 
 const Vacancies = (props) => {
-  const { isLoading } = props;
+  const { isLoading, vacanciesSettings, setSearch } = props;
   const [activePage, setPage] = useState(1);
+  const [keywords, setKeywords] = useState(undefined);
   const { data: vacancies, isFetching: isVacanciesLoading } = useVacancies(
+    vacanciesSettings,
     activePage,
     4
   );
@@ -21,10 +23,15 @@ const Vacancies = (props) => {
         overlayBlur={2}
       />
       <Input
+        value={keywords}
+        onChange={(e) => setKeywords(e.target.value)}
         icon={<IconSearch size="1rem" />}
         placeholder="Введите название вакансии"
         rightSection={
-          <Button radius={8} styles={{ root: { height: 32, marginRight: 12 } }}>
+          <Button
+            radius={8}
+            styles={{ root: { height: 32, marginRight: 12 } }}
+            onClick={() => setSearch(keywords)}>
             <p className="search">Поиск</p>
           </Button>
         }

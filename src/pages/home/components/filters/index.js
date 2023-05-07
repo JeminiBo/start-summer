@@ -1,6 +1,7 @@
+import { useState } from 'react';
 import { Flex } from '@mantine/core';
 import ResetIcon from './assets/reset.png';
-import { Select, Button } from '@mantine/core';
+import { Select, Button, NumberInput } from '@mantine/core';
 import { IconChevronDown } from '@tabler/icons-react';
 import './styles.css';
 import { useCatalogues } from '../../../../core/catalogues/useCatalogues';
@@ -10,13 +11,31 @@ const selectStyles = {
   input: { borderRadius: 8, height: 42 },
 };
 
-const Filters = () => {
+const inputStyles = {
+  rightSection: { pointerEvents: 'none' },
+  input: { borderRadius: 8, height: 42 },
+};
+
+const Filters = (props) => {
+  const { setFilters } = props;
   const { data: catalogues } = useCatalogues();
+  const [catalogue, setCatalogue] = useState(undefined);
+  const [paymentFrom, setPaymentFrom] = useState('');
+  const [paymentTo, setPaymentTo] = useState('');
   return (
     <div className="filter-wrapper">
       <Flex justify="space-between" align="center" mb={32}>
         <p className="filter-title">Фильтры</p>
-        <Flex gap={4} align="center">
+        <Flex
+          gap={4}
+          align="center"
+          onClick={() => {
+            setCatalogue(undefined);
+            setPaymentFrom('');
+            setPaymentTo('');
+            setFilters(undefined, '', '');
+          }}
+          className="filter-clear">
           <p className="filter-reset">Сбросить все</p>
           <img src={ResetIcon} alt="reset" className="reset-icon" />
         </Flex>
@@ -27,20 +46,31 @@ const Filters = () => {
           placeholder={'Выберете отрасль'}
           rightSection={<IconChevronDown size="1rem" />}
           rightSectionWidth={30}
-          data={catalogues ? catalogues.map((item) => item.title_rus) : []}
+          data={
+            catalogues
+              ? catalogues.map((item) => ({
+                  value: item.key,
+                  label: item.title_rus,
+                }))
+              : []
+          }
+          value={catalogue}
+          onChange={setCatalogue}
           styles={selectStyles}
         />
         <Flex direction="column" gap={8}>
-          <Select
+          <NumberInput
             label={<p className="filter-select-title">Оклад</p>}
             placeholder={'От'}
-            data={['React', 'Angular', 'Svelte', 'Vue']}
-            styles={selectStyles}
+            value={paymentFrom}
+            onChange={setPaymentFrom}
+            styles={inputStyles}
           />
-          <Select
+          <NumberInput
             placeholder={'До'}
-            data={['React', 'Angular', 'Svelte', 'Vue']}
-            styles={selectStyles}
+            value={paymentTo}
+            onChange={setPaymentTo}
+            styles={inputStyles}
           />
         </Flex>
       </Flex>
@@ -48,7 +78,8 @@ const Filters = () => {
         radius={8}
         color="#5E96FC"
         mt={20}
-        styles={{ root: { height: 40, width: '100%' } }}>
+        styles={{ root: { height: 40, width: '100%' } }}
+        onClick={() => setFilters(catalogue, paymentFrom, paymentTo)}>
         <p className="filer-apply">Применить</p>
       </Button>
     </div>

@@ -1,11 +1,11 @@
 import { useQuery } from 'react-query';
 import { getVacancies } from '../../api/vacancies';
 
-export const useVacancies = (page, count) => {
+export const useVacancies = (vacanciesSettings, page, count) => {
   return useQuery(
-    ['vacancies', page],
+    ['vacancies', vacanciesSettings, page],
     async () => {
-      const vacancies = await getVacancies(page, count);
+      const vacancies = await getVacancies(vacanciesSettings, page, count);
 
       return vacancies;
     },
