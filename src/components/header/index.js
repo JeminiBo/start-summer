@@ -7,7 +7,7 @@ import classNames from 'classnames';
 const HeaderContent = () => {
   const { pathname } = useLocation();
   return (
-    <Flex align="center" mih={84} gap={280}>
+    <Flex align="center" mih={84} gap={280} className={'header-wrapper'}>
       <Flex align="center" gap={12}>
         <img src={logo} alt="logo" className="header-logo" />
         <p className="title">Jobored</p>

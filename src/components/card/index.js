@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Flex } from '@mantine/core';
+import { Flex, Button } from '@mantine/core';
 import { ReactComponent as LocationIcon } from './assets/location.svg';
 import { ReactComponent as StarIcon } from './assets/star.svg';
 import './styles.css';
@@ -21,14 +21,13 @@ const Card = (props) => {
 
   return (
     <Flex
-      miw={773}
       mih={89}
       p={24}
       justify="space-between"
       bg="#fff"
       className="card"
       onClick={onClick}>
-      <Flex direction="column" gap={12}>
+      <Flex direction="column" gap={12} maw={'90%'}>
         <p className="card-title">{profession}</p>
         <Flex gap={12}>
           <p className="card-salary">{salary}</p>
@@ -40,12 +39,17 @@ const Card = (props) => {
           <p className="card-location">{town.title}</p>
         </Flex>
       </Flex>
-      <StarIcon
+      <button
         className="card-star"
-        onClick={setFavorite}
-        fill={isFavorite ? '#5E96FC' : '#fff'}
-        stroke={isFavorite ? '#5E96FC' : '#ACADB9'}
-      />
+        onClick={(e) => {
+          e.stopPropagation();
+          setFavorite();
+        }}>
+        <StarIcon
+          fill={isFavorite ? '#5E96FC' : '#fff'}
+          stroke={isFavorite ? '#5E96FC' : '#ACADB9'}
+        />
+      </button>
     </Flex>
   );
 };

@@ -3,8 +3,8 @@ import { Flex } from '@mantine/core';
 import ResetIcon from './assets/reset.png';
 import { Select, Button, NumberInput } from '@mantine/core';
 import { IconChevronDown } from '@tabler/icons-react';
-import './styles.css';
 import { useCatalogues } from '../../../../core/catalogues/useCatalogues';
+import './styles.css';
 
 const selectStyles = {
   rightSection: { pointerEvents: 'none' },

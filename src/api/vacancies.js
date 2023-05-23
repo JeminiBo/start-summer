@@ -8,6 +8,8 @@ export const getVacancies = async (vacanciesSettings, page, count) => {
     payment_from: vacanciesSettings.paymentFrom,
     payment_to: vacanciesSettings.paymentTo,
     catalogues: vacanciesSettings.catalogue,
+    published: 1,
+    no_agreement: vacanciesSettings.paymentFrom >= 0 ? 1 : 0,
   });
 
   return response;

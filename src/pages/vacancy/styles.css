@@ -9,6 +9,7 @@
 .vacancy-desc {
   border: 1px solid #eaebed;
   border-radius: 12px;
+  box-sizing: border-box;
 }
 
 .vacancy-desc-text {
@@ -26,4 +27,17 @@
 
 .vacancy-desc-list:last-child {
   margin-bottom: 0;
+}
+
+@media (max-width: 850px) {
+  .vacancy-desc {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .vacancy-desc-text p {
+    font-size: 12px;
+  }
 }

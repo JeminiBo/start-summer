@@ -19,7 +19,7 @@ const Vacancies = (props) => {
   const navigate = useNavigate();
 
   return (
-    <Flex direction="column" gap={16} miw={773} className="vacancies">
+    <Flex direction="column" gap={16} w={773} className="vacancies">
       <LoadingOverlay
         visible={isLoading || isVacanciesLoading}
         overlayBlur={2}

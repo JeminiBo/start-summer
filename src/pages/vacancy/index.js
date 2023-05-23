@@ -53,10 +53,10 @@ const Vacancy = () => {
             direction="column"
             gap={20}
             bg="#fff"
-            miw={773}
             maw={773}
             className="vacancy-desc">
             <div
+              className="vacancy-desc-text"
               dangerouslySetInnerHTML={{
                 __html: getFormattedDescription(vacancy.vacancyRichText),
               }}

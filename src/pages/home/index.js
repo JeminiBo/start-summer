@@ -3,6 +3,7 @@ import { Flex } from '@mantine/core';
 import { Filters } from './components/filters';
 import { Vacancies } from './components/vacancies';
 import { useAuth } from '../../core/auth/useAuth';
+import './styles.css';
 
 const Home = () => {
   const { isLoading } = useAuth();
@@ -20,9 +21,9 @@ const Home = () => {
   const setSearch = (keywords) => {
     setVacanciesSettings({ ...vacanciesSettings, keywords });
   };
-  
+
   return (
-    <Flex justify="center" gap={28} mt={24}>
+    <Flex className={'home-wrapper'} justify="center" gap={28} mt={24}>
       <Filters setFilters={setFilters} />
       <Vacancies
         vacanciesSettings={vacanciesSettings}
